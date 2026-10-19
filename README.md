@@ -26,13 +26,13 @@ devops-final-de003-nguyenvana/     ← Mã nguồn Spring Boot 4 (Java 21, Gradl
 ├── src/main/resources/application.properties
 ├── build.gradle                   ← Build ra file build/libs/app.jar
 ├── settings.gradle
-├── Dockerfile                     ← Multi-stage build (Gradle + JDK 21, runtime JRE 21)
-├── .dockerignore
-├── nginx/default.conf             ← Nginx reverse proxy tới app:8080
+├── Dockerfile                     ← ★ FILE KHUNG: tự hoàn chỉnh phần còn thiếu
+├── .dockerignore                  ← CÓ SẴN
+├── nginx/default.conf             ← ★ FILE KHUNG: tự đổi PORT (tránh trùng nhau)
 ├── database/init.sql              ← Bảng tasks + 8 bản ghi mẫu – CÓ SẴN
-├── docker-compose.yml             ← MySQL + Spring Boot + Nginx
-├── .github/workflows/ci-cd.yml    ← Build/test → push GHCR → deploy qua SSH
-├── student.env                    ← Thông tin sinh viên và cấu hình triển khai
+├── docker-compose.yml             ← ★ FILE KHUNG: mysql có sẵn, điền TODO 1–5
+├── .github/workflows/ci-cd.yml    ← ★ FILE KHUNG: điền TODO 1–6
+├── student.env                    ← ★ ĐIỀN THÔNG TIN SINH VIÊN
 ├── screenshots/                   ← ★ Ảnh minh chứng (Phần 5)
 ├── submission-content/            ← ★ Toàn bộ tệp minh chứng khi nộp bài
 ├── .gitignore                     ← CÓ SẴN
@@ -44,10 +44,10 @@ Phần **sinh viên phải làm** (xem đề thi):
 | File | Việc cần làm |
 |------|--------------|
 | `student.env` | Điền thông tin sinh viên và thông số triển khai |
+| `Dockerfile` | **Hoàn chỉnh**: multi-stage build, stage `build` (Gradle + JDK 21) và stage runtime (JRE 21) |
+| `docker-compose.yml` | **Điền các TODO 1–5** (service `mysql` đã có sẵn) |
+| `.github/workflows/ci-cd.yml` | **Điền các TODO 1–6** của pipeline build → push image → deploy |
 | `screenshots/` | `01-actions.png`, `02-ghcr.png`, `03-compose-ps.png`, `04-website.png` |
-
-## CI/CD
-
 Workflow chạy khi push lên nhánh `main` hoặc được khởi chạy thủ công. Nó build và smoke-test toàn bộ stack bằng Docker Compose, push image có tag commit SHA và `latest` lên GHCR, rồi deploy qua SSH. Cấu hình các GitHub Actions Secrets `SERVER_HOST`, `SERVER_USER`, và `SERVER_SSH_KEY` trước khi chạy workflow. Máy chủ deploy cần Git, Docker Compose và quyền truy cập package GHCR của repository.
 
 ## API của ứng dụng
